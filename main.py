@@ -1,17 +1,15 @@
 import sys
 
-from PyQt5 import QtGui, QtCore, sip
+import numpy as np
 from PyQt5 import QtWidgets
+from PyQt5 import sip
 from PyQt5.QtCore import (QCoreApplication, QMetaObject,
                           QSize, Qt)
-from PyQt5.QtGui import (QFont)
 from PyQt5.QtWidgets import *
-
-import numpy as np
-
 
 legs = []
 windows = []
+
 
 # это класс самой задачи
 class Task:
@@ -228,6 +226,7 @@ def MYKY_method_for_out(legs: list):
     x = np.linalg.solve(a, b)
     yield x
 
+
 class Decide(object):
     def setupUi(self, Form):
         if not Form.objectName():
@@ -321,7 +320,6 @@ class Easy_mod_ui(object):
 
         self.horizontalLayout.addWidget(self.radioButton)
 
-
         self.verticalLayout_2.addLayout(self.horizontalLayout)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
@@ -363,7 +361,6 @@ class Easy_mod_ui(object):
 
         self.horizontalLayout_7.addWidget(self.label_3)
 
-
         self.verticalLayout.addLayout(self.horizontalLayout_7)
 
         self.horizontalLayout_6 = QHBoxLayout()
@@ -390,7 +387,6 @@ class Easy_mod_ui(object):
 
         self.horizontalLayout_6.addWidget(self.lineEdit_12)
 
-
         self.verticalLayout.addLayout(self.horizontalLayout_6)
 
         self.horizontalLayout_4 = QHBoxLayout()
@@ -411,7 +407,6 @@ class Easy_mod_ui(object):
         self.lineEdit_8.setObjectName(u"lineEdit_8")
 
         self.horizontalLayout_4.addWidget(self.lineEdit_8)
-
 
         self.verticalLayout.addLayout(self.horizontalLayout_4)
 
@@ -434,9 +429,7 @@ class Easy_mod_ui(object):
 
         self.horizontalLayout_5.addWidget(self.lineEdit_10)
 
-
         self.verticalLayout.addLayout(self.horizontalLayout_5)
-
 
         self.verticalLayout_2.addLayout(self.verticalLayout)
 
@@ -449,18 +442,23 @@ class Easy_mod_ui(object):
 
         self.verticalLayout_2.addWidget(self.pushButton)
 
-
         self.retranslateUi(Form)
 
         QMetaObject.connectSlotsByName(Form)
+
     # setupUi
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.radioButton.setText(QCoreApplication.translate("Form", u"Easymod", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"\u0421\u043e\u043f\u0440\u043e\u0442\u0438\u0432\u043b\u0435\u043d\u0438\u0435", None))
-        self.label.setText(QCoreApplication.translate("Form", u"\u041d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435", None))
-        self.label_3.setText(QCoreApplication.translate("Form", u"\u0412\u043e\u043b\u044c\u0442\u0430\u0436", None))
+        self.label_2.setText(QCoreApplication.translate("Form",
+                                                        u"\u0421\u043e\u043f\u0440\u043e\u0442\u0438\u0432\u043b\u0435\u043d\u0438\u0435",
+                                                        None))
+        self.label.setText(QCoreApplication.translate("Form",
+                                                      u"\u041d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435",
+                                                      None))
+        self.label_3.setText(
+            QCoreApplication.translate("Form", u"\u0412\u043e\u043b\u044c\u0442\u0430\u0436", None))
         self.comboBox_6.setItemText(0, QCoreApplication.translate("Form", u"L", None))
         self.comboBox_6.setItemText(1, QCoreApplication.translate("Form", u"R", None))
 
@@ -549,8 +547,10 @@ def open_window(obj, x, y, w, h):
     windows[-1].show()
     windows[-1].setGeometry(x, y + 20, w, h)
 
+
 class Easy_mod(QMainWindow, Easy_mod_ui):
     now_lines = 3
+
     def __init__(self):
         super().__init__()
         self.central_widget = QtWidgets.QWidget(self)
@@ -575,10 +575,10 @@ class Easy_mod(QMainWindow, Easy_mod_ui):
                 int(el.itemAt(2).widget().text())
             except Exception as e:
                 break
-            legs.append([int(el.itemAt(0).widget().text()), el.itemAt(1).widget().currentText(), int(el.itemAt(2).widget().text())])
+            legs.append([int(el.itemAt(0).widget().text()), el.itemAt(1).widget().currentText(),
+                         int(el.itemAt(2).widget().text())])
         if len(legs) == self.now_lines:
             open_window(Decide_window, self.x() - 300, self.y(), self.width(), self.height())
-
 
     def lines(self, num):
         if self.now_lines < num:
@@ -596,10 +596,6 @@ class Easy_mod(QMainWindow, Easy_mod_ui):
                 print(type(self.verticalLayout.children()[-(i + 1)]))
                 self.deleteLayout(self.verticalLayout.children()[-(i + 1)])
         self.now_lines = num
-
-
-
-
 
     def deleteLayout(self, cur_lay):
         if cur_lay is not None:
